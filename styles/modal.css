@@ -1,0 +1,49 @@
+#loginDialog{
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #385170;
+  border: #ececec 2px solid;
+  border-radius: 1rem;
+  padding: 2vw;
+  z-index: 150;
+  /* on top */
+  opacity: 1;
+  color: #ececec;
+}
+
+#registerDialog{
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #385170;
+  border: #ececec 2px solid;
+  border-radius: 1rem;
+  padding: 2vw;
+  z-index: 150;
+  /* on top */
+  opacity: 1;
+  color: #ececec;
+}
+
+label{
+    margin-bottom: 1vw;
+}
+
+
+.modal-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  opacity: 50%;
+  background-color: black;
+  display: flex;
+}
+
