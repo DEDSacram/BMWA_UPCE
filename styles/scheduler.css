@@ -1,0 +1,18 @@
+:root{
+    --bs-background: #002a38;
+    --bs-primary : #385170;
+    --bs-primarytransparent: #38517099;
+    --bs-secondary: #ececec ;
+    --bs-special : #9fd3c7;
+  }
+
+  * {
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background-color: var(--bs-background);
+    font-family: Menlo, monospace;
+    color: var(--bs-secondary);
+}
