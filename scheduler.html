@@ -4,6 +4,49 @@
 <link rel="stylesheet" href="./styles/scheduler.css">
 </head>
 <body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <button onclick="toggleSidebar()">Back</button>
+    <button  id="addtask">+</button>
+    <div>
+        <div class="container">
+            <p class="draggable" draggable="true">1</p>
+            <p class="draggable" draggable="true">2</p>
+        </div>
+        <div class="container">
+            <p class="draggable" draggable="true">3</p>
+            <p class="draggable" draggable="true">4</p>
+        </div>
+    </div>
+</div>
 
+
+<div id="Hamburgur" onclick="toggleSidebar()">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<!-- Main Container -->
+<div class="main-container">
+    <h1>Welcome to My Website</h1>
+    <p>This is the main content area. You can collapse and expand the sidebar.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut ligula a nulla tempus pharetra. Sed ultricies ante eu urna elementum, eget scelerisque ipsum suscipit.</p>
+</div>
+
+<script>
+    function toggleSidebar() {
+        const sidebar = document.querySelector('.sidebar');
+        const main = document.querySelector('.main-container');
+        if(sidebar.style.width === '0px'){
+            sidebar.style.width = '250px';
+            main.classList.add('sidebar-expanded');
+        }else{
+            sidebar.style.width = '0'
+            main.classList.remove('sidebar-expanded');
+        }
+    }
+</script>
+<script src="draggable.js"></script>
 </body>
 </html> 

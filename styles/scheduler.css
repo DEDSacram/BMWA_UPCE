@@ -15,4 +15,111 @@ body{
     background-color: var(--bs-background);
     font-family: Menlo, monospace;
     color: var(--bs-secondary);
+
+
+ 
+}
+
+#addtask{
+  display: block;
+  justify-content: center;
+}
+
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+/* Sidebar styles */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 0px;
+  height: 100%;
+  background: #333;
+  position: fixed;
+  overflow-x: hidden;
+  transition: 0.3s;
+  z-index: 8;
+}
+
+
+
+.sidebar button {
+  background-color: transparent;
+  width: 100%;
+  padding: 20px;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar button:hover {
+  background-color: #555;
+}
+
+.sidebar .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+/* Main container styles */
+.main-container {
+  padding: 20px;
+}
+
+/* Collapse sidebar on small screens */
+@media screen and (max-width: 768px) {
+  .sidebar {
+      width: 0;
+  }
+  .main-container {
+      margin-left: 0;
+  }
+}
+
+.sidebar-closed {
+  width: 0;
+}
+
+.sidebar-expanded {
+  margin-left: 250px;
+}
+
+
+#Hamburgur span{
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  background: #cdcdcd;
+  border-radius: 3px;
+  z-index: 1;
+}
+
+#Hamburgur{
+  top: 20px;
+  left: 20px;
+  position: absolute;
+  z-index: 5;
+}
+
+.draggable {
+  padding: 1rem;
+  background-color: white;
+  border: 1px solid black;
+  cursor: move;
+}
+
+.draggable.dragging {
+  opacity: .5;
 }
