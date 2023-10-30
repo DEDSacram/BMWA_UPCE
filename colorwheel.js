@@ -2,6 +2,8 @@
 
 // add callback after confirm
 
+// need to move mouse to pick color on sidepanel also wheel
+
 //add responsivity
 
 function degreesToRadians(degrees) {

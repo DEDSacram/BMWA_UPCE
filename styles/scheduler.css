@@ -1,10 +1,13 @@
 :root{
-    --bs-background: #002a38;
-    --bs-primary : #385170;
-    --bs-primarytransparent: #38517099;
-    --bs-secondary: #ececec ;
-    --bs-special : #9fd3c7;
-  }
+  --bs-background: #002a38;
+  --bs-primary : #385170;
+  --bs-primarytransparent: #38517099;
+  --bs-secondary: #ececec;
+  --bs-special : #9fd3c7;
+  --bs-basefontcolor : #ececec;
+  --bs-basefont: Menlo, monospace;
+  --bs-blackout: black;
+}
 
   * {
     padding: 0;
@@ -12,12 +15,9 @@
 }
 
 body{
-    background-color: var(--bs-background);
-    font-family: Menlo, monospace;
-    color: var(--bs-secondary);
-
-
- 
+  background-color: var(--bs-background);
+  font-family: var(--bs-basefont);
+  color: var(--bs-secondary);
 }
 
 

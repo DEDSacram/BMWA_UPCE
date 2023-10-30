@@ -1,3 +1,14 @@
+:root{
+  --bs-background: #002a38;
+  --bs-primary : #385170;
+  --bs-primarytransparent: #38517099;
+  --bs-secondary: #ececec;
+  --bs-special : #9fd3c7;
+  --bs-basefontcolor : #ececec;
+  --bs-basefont: Menlo, monospace;
+  --bs-blackout: black;
+}
+
 #loginDialog{
   display: none;
   position: fixed;
@@ -5,13 +16,13 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #385170;
-  border: #ececec 2px solid;
+  border: var(--bs-secondary) 2px solid;
   border-radius: 1rem;
   padding: 2vw;
   z-index: 150;
   /* on top */
   opacity: 1;
-  color: #ececec;
+  color: var(--bs-basefontcolor);
 }
 
 #registerDialog{
@@ -20,14 +31,14 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #385170;
-  border: #ececec 2px solid;
+  background-color: var(--bs-primary);
+  border: var(--bs-secondary) 2px solid;
   border-radius: 1rem;
   padding: 2vw;
   z-index: 150;
   /* on top */
   opacity: 1;
-  color: #ececec;
+  color: var(--bs-basefontcolor);
 }
 
 label{
@@ -43,7 +54,7 @@ label{
   left: 0;
   z-index: 100;
   opacity: 50%;
-  background-color: black;
+  background-color: var(--bs-blackout);
   display: flex;
 }
 

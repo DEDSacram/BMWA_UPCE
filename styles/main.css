@@ -1,14 +1,13 @@
-
-/* reset */
 :root{
   --bs-background: #002a38;
   --bs-primary : #385170;
   --bs-primarytransparent: #38517099;
-  --bs-secondary: #ececec ;
+  --bs-secondary: #ececec;
   --bs-special : #9fd3c7;
+  --bs-basefontcolor : #ececec;
+  --bs-basefont: Menlo, monospace;
+  --bs-blackout: black;
 }
-
-
 
  * {
     padding: 0;
@@ -21,7 +20,7 @@ a, a:visited, a:hover, a:active {
 
 body{
     background-color: var(--bs-background);
-    font-family: Menlo, monospace;
+    font-family: var(--bs-basefont);
     color: var(--bs-secondary);
 }
 
@@ -36,11 +35,9 @@ body{
   top: 0;
   bottom: 0;
   z-index: -1;
-  /* opacity: 40%; */
   filter: opacity(40%) blur(3px);
-  /* animation: mymove 12s infinite; */
 }
-
+/* animation: mymove 12s infinite; */
 /* @keyframes mymove {
   0%   {filter: opacity(80%) hue-rotate(0deg) blur(3px);}
   33% {filter: opacity(40%) hue-rotate(0deg) blur(3px);}
@@ -48,7 +45,6 @@ body{
 } */
 
 #brandname{
-
    color: var(--bs-special); 
    font-weight: bold;
    letter-spacing: 0.15rem;
