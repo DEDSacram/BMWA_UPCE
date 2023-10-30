@@ -38,13 +38,7 @@ if (afterElement == null) {
 }
 })
 
-
     main.appendChild(div)
-
-
-    
-    
-    
 }
 
 function getDragAfterElement(container, y) {
