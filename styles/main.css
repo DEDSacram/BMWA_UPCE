@@ -77,6 +77,15 @@ body{
   height: 80vh;
   display: flex;
 }
+.detail-box h2{
+  text-align: left;
+}
+.detail-box p:first{
+  text-align: center;
+}
+h2{
+  text-align: center;
+}
 
 #background-video {
   display: block;
