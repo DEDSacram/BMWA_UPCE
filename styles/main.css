@@ -35,7 +35,7 @@
   flex-direction: column;
   right: -100px;
   width:  100px; /* Fixed width for each image */
-  height: 20rem; /* Set your desired height */
+  height: 100%; /* Set your desired height */
 }
 
 @keyframes moveLeft {
@@ -222,6 +222,7 @@ flex-grow: 2;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  text-align: center;
 }
 
 .heading_container h2 {
@@ -314,5 +315,4 @@ h1{
     text-align: center;
     padding: 12px;
     text-decoration: none;
-    font-size: 17px;
   }
