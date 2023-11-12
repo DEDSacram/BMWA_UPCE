@@ -71,10 +71,13 @@ body{
   height: 80vh;
   display: flex;
 }
-.detail-box h2{
+.detail-box-top h2{
   text-align: left;
 }
-.detail-box p:first{
+.detail-box-top p{
+  text-align: left;
+}
+.detail-box p{
   text-align: center;
 }
 h2{
