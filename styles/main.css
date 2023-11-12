@@ -203,6 +203,11 @@ h2{
   padding-top: 60px;
   padding-bottom: 60px;
 }
+.layout_padding_bottom {
+  padding-bottom: 60px;
+}
+
+
 .info-container{
   display: flex;
   flex-direction: row;
@@ -288,16 +293,19 @@ h1{
   #img-box{
     display: none;
   }
-  .detail-box img{
-    display: none;
-  }
   #partners{
     display: none;
   }
   .moving-image h3 {
     display: none;
   }
+  .client_section .detail-box {
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+  }
 }
+
 
 
 
