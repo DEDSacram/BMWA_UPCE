@@ -14,6 +14,53 @@
     margin: 0;
 }
 
+
+
+
+/*    PARTNERS       */
+#rotation {
+  width: 100vw; /* Fixed width to prevent layout changes */
+  height: 20rem;
+  position: relative;
+  overflow-x: hidden;
+
+}
+
+/* Style the moving image */
+.moving-image {
+  position: absolute;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  right: -100px;
+  width:  100px; /* Fixed width for each image */
+  height: 20rem; /* Set your desired height */
+}
+
+@keyframes moveLeft {
+  0% {
+    transform: translateX(0); /* Start position: completely off the right side */
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90%{
+    opacity: 1;
+  }
+  100% {
+                              /*  Whole site + width */
+    transform: translateX(calc(-100vw - 100px)); /* End position: completely off the left side */
+    opacity: 0;
+  }
+}
+
+.animatenow{                  /* time for animation */
+  animation: moveLeft infinite 10s linear; 
+}
+
+
 a, a:visited, a:hover, a:active {
   color: inherit;
 }
@@ -162,6 +209,13 @@ flex-grow: 2;
   display: block;
 }
 
+.img-box img{
+  height: 5rem;
+  width: auto;
+  display: block;
+  margin-right: 2rem;
+}
+
 
 
 .heading_container {
@@ -192,10 +246,21 @@ flex-grow: 2;
   text-align: center;
 }
 .layout_padding {
-  padding-top: 90px;
-  padding-bottom: 90px;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
+.info-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#partners{
+  filter: grayscale(100%);
+  display: flex;
+  justify-content: space-around;
+}
 
 
 .client_section .detail-box {
@@ -214,6 +279,11 @@ flex-grow: 2;
   margin-top: 15px;
   margin-bottom: 25px;
 }
+
+.footer_section .container{
+  text-align: center;
+}
+
 
 
 h1{

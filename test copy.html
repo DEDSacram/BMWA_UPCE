@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Style the container */
+    body{
+      overflow: hidden;
+    }
+    .container {
+      width: 100vw; /* Fixed width to prevent layout changes */
+      height: 200px;
+   
+      overflow-x: visible;
+    }
+
+
+
+    /* Style the moving image */
+    .moving-image {
+      position: absolute;
+      right: -100px;
+      width:100px; /* Fixed width for each image */
+      height: 100px; /* Set your desired height */
+      background-color: #3498db; /* Set your desired background color */
+      opacity: 1; /* Initial opacity */
+
+      /* transition: all 4s ease-in-out; */
+    }
+
+    @keyframes moveLeft {
+      0% {
+        transform: translateX(0); /* Start position: completely off the right side */
+      }
+      100% {
+                                  /*  Whole site + width */
+        transform: translateX(calc(-100vw - 100px)); /* End position: completely off the left side */
+      }
+    }
+
+    .animatenow{                  /* time for animation */
+      animation: moveLeft infinite 10s linear; 
+    }
+
+/*
+    #whereto{
+      position: absolute;
+      height: 100px; 
+      width: 100px;
+      transform: translateX(-100px);
+      background-color: #3498db;
+      left: 0;
+      top: 0;
+      z-index: -50;
+    }
+    #wherefrom{
+      position: absolute;
+      height: 100px; 
+      width: 100px;
+      background-color: #3498db; 
+      transform: translateX(100px);
+      right: 0;
+      top: 0;
+      z-index: -50;
+    }
+*/
+
+    .color{
+      background-color: black;
+    }
+
+
+
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="moving-image">ababb</div>
+    <div class="moving-image">sdsdsd</div>
+    <div class="moving-image">asdsad</div>
+    <div class="moving-image">dds</div>
+</div>
+
+<script>
+let index = 0;
+let lol = document.querySelectorAll('.moving-image');
+let destroyafter
+                     /* distribute time equally */
+let equalspacing = 10000 / lol.length
+
+destroyafter = setInterval(function() {
+      lol[index].classList.add("animatenow")
+      console.log(index)
+      console.log(lol[index])
+      index++;
+      index = index % 4;
+      if(index === 0){
+        clearInterval(destroyafter)
+
+        setInterval(function() {
+      lol[index].classList.add("color")
+      index++;
+      index = index % 4;
+   },equalspacing)
+      }
+   }, equalspacing);
+</script>
+
+</body>
+</html>
