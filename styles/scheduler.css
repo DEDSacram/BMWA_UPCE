@@ -119,9 +119,13 @@ body{
   margin-left: 250px;
 }
 
+#sidebar-todos{
+  height: 100%;
+}
+
 
 #Hamburgur span{
-  display: block;
+  display: flex;
   width: 33px;
   height: 4px;
   margin-bottom: 5px;
