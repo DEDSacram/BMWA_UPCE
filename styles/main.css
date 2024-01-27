@@ -19,7 +19,7 @@
  /* Fixed width to prevent layout changes */
   height: 20rem;
   position: relative;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 /* Style the moving image */
 .moving-image {
@@ -28,35 +28,12 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  right: -100px;
   width: 100px;
  /* Fixed width for each image */
   height: 100%;
  /* Set your desired height */
 }
-@keyframes moveLeft {
-  0% {
-      transform: translateX(0);
-     /* Start position: completely off the right side */
-      opacity: 0;
- }
-  10% {
-      opacity: 1;
- }
-  90%{
-      opacity: 1;
- }
-  100% {
-     /* Whole site + width */
-      transform: translateX(calc(-100vw - 100px));
-     /* End position: completely off the left side */
-      opacity: 0;
- }
-}
-.animatenow{
- /* time for animation */
-  animation: moveLeft infinite 10s linear;
-}
+
 a, a:visited, a:hover, a:active {
   color: inherit;
 }
