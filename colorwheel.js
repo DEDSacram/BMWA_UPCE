@@ -6,6 +6,8 @@
 
 //add responsivity
 
+// doesnt count with any margins or padding
+
 function degreesToRadians(degrees) {
     return degrees * (Math.PI / 180);
   }
@@ -34,12 +36,14 @@ function createcolorpicker(canvasname,brightnessname,previewname){
   canvas.addEventListener("mousedown", (event) => {
     // instead of document listener can be fixed with a draggable div
     
-    let canvas = event.target;
+    // let canvas = event.target;
+
     // checking the circle
     let rect = canvas.getBoundingClientRect();
     let r = rect.width/2
 
     let color = []
+ 
     
     // tags for better performance
     let context = canvas.getContext('2d',{
@@ -49,8 +53,9 @@ function createcolorpicker(canvasname,brightnessname,previewname){
         willReadFrequently:true
       });
     function logKey(e) {
-        if(Math.pow((e.clientX-r),2) + Math.pow((e.clientY-r),2) < Math.pow(r,2)){
-            color = [...(context.getImageData(e.clientX, e.clientY, 1, 1,).data).slice(0,-1)]
+      
+        if(Math.pow((e.offsetX-r),2) + Math.pow((e.offsetY-r),2) < Math.pow(r,2)){
+            color = [...(context.getImageData(e.offsetX, e.offsetY, 1, 1,).data).slice(0,-1)]
             previewer.style.backgroundColor = "rgb("+ color +")"
             brightness.style.background =  "linear-gradient(0, rgb(0,0,0) 0%, rgb("+ color +") 100%)"
         }
@@ -75,7 +80,7 @@ function createcolorpicker(canvasname,brightnessname,previewname){
     let rgb = previewer.getAttribute('colorsave').split(',')
     let brightvalue = 1
     function log(e) {
-        brightvalue = Math.floor((1-(e.clientY/slider.height)) * 100) / 100
+        brightvalue = Math.floor((1-(e.offsetY/slider.height)) * 100) / 100
         previewer.style.backgroundColor =  `rgb(${rgb[0]*brightvalue},${rgb[1]*brightvalue},${rgb[2]*brightvalue},1)`
     }
     brightness.addEventListener("mousemove", log);

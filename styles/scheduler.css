@@ -22,24 +22,54 @@ body{
   display: flex;
 }
 
-#colorpicker{
+
+
+
+
+
+
+
+
+/* settings */
+
+
+#settings svg{
+  margin-top: 10px;
+  height: 50%;
+  color: var(--bs-secondary);
+  fill: var(--bs-secondary);
+}
+
+#settings{
+  position: absolute;
+  right: 0;
+  margin-right: 30px;
   display: flex;
-  flex-direction: column;
-  text-align: center;
-  user-select: none;
-}
+  height: 30px;
+  padding: 10px;
+  align-items: center;
+  border-radius: 0 0 10px 10px;
+  background-color: var(--bs-special);
 
-#colorpickerside{
+}
+#edit{
+  position: absolute;
+  right: 0;
+  margin-right: 70px;
   display: flex;
+  height: 30px;
+  padding: 10px;
+  align-items: center;
+  border-radius: 0 0 10px 10px;
+  background-color: var(--bs-special);
 }
-#sidepicker{
-  width: 20px;
-  height: 100%;
-  background: linear-gradient(0, rgba(0,0,0,1) 0%, rgba(255,166,10,1) 100%);
+
+#edit svg{
+  margin-top: 10px;
+  height: 50%;
+  color: var(--bs-secondary);
+  fill: var(--bs-secondary);
 }
-
-
-
 
 
 #addtask{
@@ -124,23 +154,23 @@ body{
 }
 
 
-#Hamburgur span{
-  display: flex;
-  width: 33px;
-  height: 4px;
-  margin-bottom: 5px;
-  position: relative;
-  background: var(--bs-special);
-  border-radius: 3px;
-  z-index: 1;
-}
+
+
 
 #Hamburgur{
   top: 20px;
   left: 20px;
+  display: flex;
+  flex-direction: column;
   position: absolute;
   z-index: 5;
 }
+
+#Hamburgur svg{
+  stroke: var(--bs-secondary);
+  fill: var(--bs-secondary);
+}
+
 
 .draggable {
   padding: 1rem;
