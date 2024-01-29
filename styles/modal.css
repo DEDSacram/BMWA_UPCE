@@ -35,7 +35,7 @@
   border: var(--bs-secondary) 2px solid;
   border-radius: 1rem;
   padding: 2vw;
-  z-index: 150;
+  z-index: 160;
   /* on top */
   opacity: 1;
   color: var(--bs-basefontcolor);
