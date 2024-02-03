@@ -48,39 +48,51 @@
       <input type="password" id="password" name="password">
       <br>
       <div>
-        <button id="loginCancel">Cancel</button>
-        <button id="confirmBtn" value="default">Confirm</button>
-        <button id="registerBtn">Register</button>
+        <button id="loginCancel" type="button">Zrusit</button>
+        <button id="confirmBtn" type="button">Prihlasit</button>
+        <button id="registerBtn" type="button">Registrovat</button>
       </div>
     </form>
   </div>
  
 
-  <div id="registerDialog">
-    <form>
-      <label for="email">Email</label>
-      <br>
-      <br>
-      <input type="text" id="email" name="email">
-      <br>
-      <br>
-      <label for="password">Heslo</label>
-      <br>
-      <br>
-      <input type="password" id="password" name="password">
-      <br>
-      <br>
-      <label for="confirmPassword">Potvrzení hesla</label>
-      <br>
-      <br>
-      <input type="password" id="confirmPassword" name="confirmPassword">
-      <br>
-      <div>
-        <button id="registerCancel">Cancel</button>
-        <button id="confirmRegister" value="default">Register</button>
+      <div id="registerDialog">
+        <div>
+        <form>
+          <div class="dialog-inside">
+            <label for="email">Email</label>
+            <br>
+            <br>
+            <input type="text" id="email" name="email" required>
+            <br>
+            <span id="emailError" class="reminder-warning"></span> <!-- Error message for email -->
+          </div>
+          <br>
+          <div>
+            <label for="password">Heslo</label>
+            <br>
+            <br>
+            <input type="password" id="password" name="password" required>
+            <br>
+            <span id="passwordError" class="reminder-warning"></span> <!-- Error message for password -->
+          </div>
+          <br>
+          <div>
+            <label for="confirmPassword">Potvrzení hesla</label>
+            <br>
+            <br>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <br>
+            <span id="confirmPasswordError" class="reminder-warning"></span> <!-- Error message for confirm password -->
+          </div>
+          <br>
+          <div>
+            <button id="registerCancel" type="button">Zrusit</button>
+            <button type="submit">Registrovat</button>
+          </div>
+        </form>
+        </div>
       </div>
-    </form>
-  </div>
 
 
   <section class="experience_section layout_padding">
