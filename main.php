@@ -80,9 +80,6 @@
       <span id="confirmPasswordError" class="reminder-warning"></span>
       <br/>
       <button type="submit" class="modal-btn-full">Registrovat se</button>
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Zapamatovat si mě
-      </label>
     </div>
     <div class="container-modal-bottom">
       <div class="container-column">

@@ -1,3 +1,13 @@
+<?php
+ob_start(); // Start output buffering
+session_start(); // Start the session
+
+if (!isset($_SESSION['user'])) {
+    header('Location: main.php'); // Redirect to the login page
+    exit;
+}
+ob_end_flush();
+?>
 <!DOCTYPE html>
 <html>
 <head>

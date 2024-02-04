@@ -39,8 +39,57 @@ loginCancel.addEventListener("click", () => {
 
 loginForm.addEventListener('submit', function(event) {
         event.preventDefault();
-        // Your code here...
-    });
+
+        let formElements = event.target.elements;
+        // Access form fields by their names
+        let email = formElements["email"].value;
+        let password = formElements["password"].value;
+        let remember = formElements["remember"].checked;
+
+        // let post = true;
+
+
+        // Get the current URL path
+        // const currentPath = window.location.pathname;
+        // const newPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
+        // Create a new FormData object
+        let formData = new FormData();
+        formData.append("action", "login");
+        formData.append("email", email);
+        formData.append("password", password);
+        fetch("http://localhost/BMWA_UPCE/api/userlogin.php", {
+                method: "POST",
+                body: formData
+        })
+                .then(response => response.json()) // Parse response as JSON
+                .then(data => {
+                        alert(data.message);
+                        // if(data.status == 1){
+                        //         alert(data.message);
+                        //         formData = new FormData();
+                        //         formData.append("action", "startsession");
+                        //         if(remember){
+                        //                 formData.append("action-remember", "true");
+                        //         }else{
+                        //                 formData.append("action-remember", "false");
+                        //         }
+                        //         fetch("http://localhost/BMWA_UPCE/api/userlogin.php", {
+                        //         method: "POST",
+                        //         body: formData,
+                        //         credentials: 'include' // Include cookies in the request
+                        //         }).then(response => response.json()).then(data => {
+                        //                 window.location.href = "index.php";
+                        //         })
+                        // }
+                })
+                .catch(error => {
+                        console.log("Error:", error);
+                })
+
+
+
+
+        });
     
 
 
@@ -108,8 +157,6 @@ registerForm.addEventListener('submit', function(event) {
                 // Remove any existing warning above the confirmPassword input
                 confirmPasswordError.textContent = "";
         }
-        //to be removed
-        post = true;
 
         if (!post) {
                 return;
@@ -122,17 +169,18 @@ registerForm.addEventListener('submit', function(event) {
 
         // Create a new FormData object
         const formData = new FormData();
+        formData.append("action", "register");
         formData.append("email", email);
         formData.append("password", password);
         formData.append("confirmPassword", confirmPassword);
         console.log(newPath + "/api/register.php")
-        fetch("http://localhost/BMWA_UPCE/api/register.php", {
+        fetch("http://localhost/BMWA_UPCE/api/userlogin.php", {
                 method: "POST",
                 body: formData
         })
                 .then(response => response.json()) // Parse response as JSON
                 .then(data => {
-                        console.log(data);
+                        alert(data.message);
                 })
                 .catch(error => {
                         console.log("Error:", error);
