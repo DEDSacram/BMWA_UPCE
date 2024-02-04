@@ -163,13 +163,3 @@ switch ($data['action']) {
         ]);
 }
 createuser($data);
-
-
-
-
-
-
-
-
-
-
