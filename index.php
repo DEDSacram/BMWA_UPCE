@@ -1,6 +1,9 @@
 <?php
 ob_start(); // Start output buffering
+
 session_start(); // Start the session
+// session_destroy();
+
 
 if (!isset($_SESSION['user'])) {
     header('Location: main.php'); // Redirect to the login page
