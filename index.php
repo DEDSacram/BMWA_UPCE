@@ -1,19 +1,48 @@
 <?php
 ob_start(); // Start output buffering
-
+ini_set('display_startup_errors', 1);
+ini_set('display_errors', 1);
+error_reporting(-1);
 session_start(); // Start the session
-// session_destroy();
 
+//Communicate that session has been destroyed and that the code for checking cookie should be checked again // need to reset session storage
+//todo
 
-if (!isset($_SESSION['user'])) {
-    header('Location: main.php'); // Redirect to the login page
-    exit;
+if($_SESSION['guard'] == false && $_SESSION['guard'] != null){
+  header('Location: main.php'); // Redirect to the login page
+  exit;
 }
 ob_end_flush();
 ?>
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+
+if (sessionStorage.getItem('hasCodeRunBefore') != 'true') {
+  let formData = new FormData();
+  formData.append("action", "checkcookie");
+  fetch("http://localhost/BMWA_UPCE/api/userlogin.php", {
+      method: "POST",
+      body: formData,
+      credentials: 'include' // Include cookies in the request
+  })
+  .then(response => response.json()) // Parse response as JSON
+  .then(data => {
+   if(data.status){
+    sessionStorage.setItem('hasCodeRunBefore', 'true');
+    window.location.reload()
+   }else{
+    sessionStorage.setItem('hasCodeRunBefore', 'false');
+    window.location.reload()
+   }
+  })
+  .catch(error => {
+      console.log("Error:", error);
+  });
+}
+ 
+</script>
 <link rel="stylesheet" href="./styles/scheduler.css">
 
 <link rel="stylesheet" href="./styles/scheduler-settings.css">
@@ -170,4 +199,4 @@ ob_end_flush();
     createcolorpicker('canvas','sidepicker','colorpreview')
 </script>
 </body>
-</html> 
+</html>

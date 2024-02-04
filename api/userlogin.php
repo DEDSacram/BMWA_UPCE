@@ -83,6 +83,12 @@ function loginuser($data) {
 }
 
 function checkcookie($data) {
+    session_set_cookie_params([
+        'samesite' => 'Lax', // or 'Strict' or 'None'
+    ]);
+    session_start();
+    $_SESSION['guard'] = false;
+  
     if (!isset($_COOKIE['rememberme'])) {
         send_response([
             'status' => 0,
@@ -132,11 +138,9 @@ function checkcookie($data) {
         return;
     }
 
-    session_set_cookie_params([
-        'samesite' => 'Lax', // or 'Strict' or 'None'
-    ]);
-    session_start();
     $_SESSION['user'] = $user['Email'];
+    //guarding of site
+    $_SESSION['guard'] = true;
     send_response([
         'status' => 1,
         'message' => 'Přihlášení úspěšné',

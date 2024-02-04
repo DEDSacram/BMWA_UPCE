@@ -206,9 +206,6 @@
       <p> © 2023 Ondrej Skutil </p>
     </div>
   </footer>
-  <script>
-    
-  </script>
   <script src="modalscript.js"></script>
   <script src="rotation.js"></script>
 </body>
