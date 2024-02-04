@@ -1,132 +1,144 @@
-//modal n1
 const showButton = document.getElementById("showDialog");
 const loginDialog = document.getElementById("loginDialog");
-//form
+
+
 const loginForm = loginDialog.querySelector("form")
+const loginCancel = loginDialog.querySelector(".cancelbtn")
 const loginConfirm = loginDialog.querySelector("#confirmBtn")
-const loginCancel = loginDialog.querySelector("#loginCancel")
 
-// makes a shadow behind the modal
-const modalblackout = document.getElementById("modal-blackout")
-
-// modal n2
-const registerDialog = document.getElementById("registerDialog")
-// form
-const registerForm = registerDialog.querySelector("form")
-//open from modal n1
 const registerShow = loginDialog.querySelector("#registerBtn")
-const registerCancel = registerDialog.querySelector("#registerCancel")
+const registerDialog = document.getElementById("registerDialog")
+const registerCancel = registerDialog.querySelector(".cancelbtn")
+const registerForm = registerDialog.querySelector("form")
+const registerToLogin = registerDialog.querySelector("#registerToLogin")
+// //warnings
+// let emailError = document.getElementById('emailError');
+// let passwordError = document.getElementById('passwordError');
+// let confirmPasswordError = document.getElementById('confirmPasswordError');
 
-//warnings
-let emailError = document.getElementById('emailError');
-let passwordError = document.getElementById('passwordError');
-let confirmPasswordError = document.getElementById('confirmPasswordError');
 
-let isOpen = false; // boolean variable to track if a modal is open
-
-// Function to open the modal
+// // Function to open the modal
 function openModal(modal) {
-  modal.style.display = "flex";
-  modalblackout.classList = ["modal-container"];
-  }
+    modal.style.display = 'block';
+    }
 
 // Function to close the modal
 function closeModal(modal) {
-  modal.style.display = "none";
-  modalblackout.classList = [];
+    modal.style.display = "none";
 }
 
 // Event listener for the showButton to open the loginDialog
 showButton.addEventListener("click", () => {
-  openModal(loginDialog);
-});
-
-// Event listener for the loginConfirm button to close the loginDialog and open the registerDialog
-registerShow.addEventListener("click", () => {
-  closeModal(loginDialog);
-  openModal(registerDialog);
+    openModal(loginDialog);
 });
 
 // Event listener for the loginCancel button to close the loginDialog
 loginCancel.addEventListener("click", () => {
-  closeModal(loginDialog);
+    closeModal(loginDialog);
 });
-
-// Event listener for the registerCancel button to close the registerDialog
-registerCancel.addEventListener("click", () => {
-  closeModal(registerDialog);
-});
-
-// Event listener for the registerConfirm button to close the registerDialog
-
-// Assuming `loginForm` is the form that should not be submitted
 
 loginForm.addEventListener('submit', function(event) {
-  event.preventDefault();
-  // Your code here...
-});
-
-registerForm.addEventListener('submit', function(event) {
-  event.preventDefault();
-
-  let formElements = event.target.elements;
-  console.log(formElements);
-  // Access form fields by their names
-  let email = formElements["email"].value;
-  let password = formElements["password"].value;
-  let confirmPassword = formElements["confirmPassword"].value;
-
-  // Regular expression patterns for email and password validation
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-
-
-  let post = true //isready to post ?
-  // Check if email is valid
-  if (!emailPattern.test(email)) {
-    console.log("Invalid email");
-    // Add warning above the email input
-    emailError.textContent = "Please enter a valid email.";
-    post = false
-  } else {
-    // Remove any existing warning above the email input
-    emailError.textContent = "";
-  }
-
-  // Check if password is valid
-  if (!passwordPattern.test(password)) {
-    console.log("Invalid password. Password must contain at least 8 characters, including at least one letter and one number.");
-    // Add warning above the password input
-    passwordError.textContent = "Invalid password. Password must contain at least 8 characters, including at least one letter and one number.";
-    post = false
-  } else {
-    // Remove any existing warning above the password input
-    passwordError.textContent = "";
-  }
-
-  // Check if passwords match
-  if (password !== confirmPassword) {
-    console.log("Passwords do not match");
-    // Add warning above the confirmPassword input
-    confirmPasswordError.textContent = "Passwords do not match";
-    post = false
-  } else {
-    // Remove any existing warning above the confirmPassword input
-    confirmPasswordError.textContent = "";
-  }
-
-  if(!post){
-    return;
-  }
-  // If all validations pass, proceed with further logic
-  console.log("Email and passwords are valid");
-
-  // Your code here...
-});
+        event.preventDefault();
+        // Your code here...
+    });
+    
 
 
 
-modalblackout.addEventListener("click", () => {
+registerShow.addEventListener("click", () => {
+        console.log("registerShow");
     closeModal(loginDialog);
+    openModal(registerDialog);
+});
+
+registerToLogin.addEventListener("click", () => {
+    closeModal(registerDialog);
+    openModal(loginDialog);
+});
+
+registerCancel.addEventListener("click", () => {
     closeModal(registerDialog);
 });
+
+
+registerForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        let formElements = event.target.elements;
+        console.log(formElements);
+        // Access form fields by their names
+        let email = formElements["email"].value;
+        let password = formElements["password"].value;
+        let confirmPassword = formElements["confirmPassword"].value;
+
+        // Regular expression patterns for email and password validation
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+        let post = true; //is ready to post?
+        // Check if email is valid
+        if (!emailPattern.test(email)) {
+                console.log("Neplatný email");
+                // Add warning above the email input
+                emailError.textContent = "Prosím zadejte platný email.";
+                post = false;
+        } else {
+                // Remove any existing warning above the email input
+                emailError.textContent = "";
+        }
+
+        // Check if password is valid
+        if (!passwordPattern.test(password)) {
+                console.log("Neplatné heslo. Heslo musí obsahovat alespoň 8 znaků, včetně jednoho písmene a jednoho čísla.");
+                // Add warning above the password input
+                passwordError.textContent = "Neplatné heslo. Heslo musí obsahovat alespoň 8 znaků, včetně jednoho písmene a jednoho čísla.";
+                post = false;
+        } else {
+                // Remove any existing warning above the password input
+                passwordError.textContent = "";
+        }
+
+        // Check if passwords match
+        if (password !== confirmPassword) {
+                console.log("Hesla se neshodují");
+                // Add warning above the confirmPassword input
+                confirmPasswordError.textContent = "Hesla se neshodují";
+                post = false;
+        } else {
+                // Remove any existing warning above the confirmPassword input
+                confirmPasswordError.textContent = "";
+        }
+        //to be removed
+        post = true;
+
+        if (!post) {
+                return;
+        }
+
+
+        // Get the current URL path
+        const currentPath = window.location.pathname;
+        const newPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
+
+        // Create a new FormData object
+        const formData = new FormData();
+        formData.append("email", email);
+        formData.append("password", password);
+        formData.append("confirmPassword", confirmPassword);
+        console.log(newPath + "/api/register.php")
+        fetch("http://localhost/BMWA_UPCE/api/register.php", {
+                method: "POST",
+                body: formData
+        })
+                .then(response => response.json()) // Parse response as JSON
+                .then(data => {
+                        console.log(data);
+                })
+                .catch(error => {
+                        console.log("Error:", error);
+                })
+
+
+
+
+        });

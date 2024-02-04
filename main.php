@@ -33,66 +33,71 @@
       <source src="./img/test.mp4" type="video/webm">
     </video>
   </div>
-  <div id="modal-blackout"></div>
-  <div id="loginDialog">
-    <form>
-      <label for="email">Email</label>
-      <br>
-      <br>
-      <input type="text" id="email" name="email">
-      <br>
-      <br>
-      <label for="password">Heslo</label>
-      <br>
-      <br>
-      <input type="password" id="password" name="password">
-      <br>
-      <div>
-        <button id="loginCancel" type="button">Zrusit</button>
-        <button id="confirmBtn" type="button">Prihlasit</button>
-        <button id="registerBtn" type="button">Registrovat</button>
-      </div>
-    </form>
-  </div>
- 
 
-      <div id="registerDialog">
-        <div>
-        <form>
-          <div class="dialog-inside">
-            <label for="email">Email</label>
-            <br>
-            <br>
-            <input type="text" id="email" name="email" required>
-            <br>
-            <span id="emailError" class="reminder-warning"></span> <!-- Error message for email -->
-          </div>
-          <br>
-          <div>
-            <label for="password">Heslo</label>
-            <br>
-            <br>
-            <input type="password" id="password" name="password" required>
-            <br>
-            <span id="passwordError" class="reminder-warning"></span> <!-- Error message for password -->
-          </div>
-          <br>
-          <div>
-            <label for="confirmPassword">Potvrzení hesla</label>
-            <br>
-            <br>
-            <input type="password" id="confirmPassword" name="confirmPassword" required>
-            <br>
-            <span id="confirmPasswordError" class="reminder-warning"></span> <!-- Error message for confirm password -->
-          </div>
-          <br>
-          <div>
-            <button id="registerCancel" type="button">Zrusit</button>
-            <button type="submit">Registrovat</button>
-          </div>
-        </form>
-        </div>
+<div id="loginDialog" class="modal">
+  <form class="modal-content animate">
+    <div class="container">
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Zadejte Email" name="email" required>
+
+      <label for="psw"><b>Heslo</b></label>
+      <input type="password" placeholder="Zadejte heslo"  name="password" required>
+        
+      <button type="submit" class="modal-btn-full">Přihlásit se</button>
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Zapamatovat si mě
+      </label>
+    </div>
+    <div class="container-modal-bottom">
+    <div class="container-column">
+      <button type="button" class="cancelbtn">Zrušit</button>
+    </div>
+      <div class="container-column">
+      <span class="psw"> <a href="#"  id="registerBtn">Nemáte účet?</a></span>
+      <span class="psw"><a href="#">Zapomněli jste heslo?</a></span>
       </div>
+    </div>
+  </form>
+</div>
+
+
+<div id="registerDialog" class="modal">
+  <form class="modal-content animate">
+    <div class="container">
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Zadejte Email" name="email" required>
+      <br/>
+      <span id="emailError" class="reminder-warning"></span>
+      <br/>
+      <label for="psw"><b>Heslo</b></label>
+      <input type="password" placeholder="Zadejte heslo" name="password" required>
+      <br/>
+      <span id="passwordError" class="reminder-warning"></span>
+      <br/>
+      <label for="confirm_psw"><b>Potvrďte heslo</b></label>
+      <input type="password" placeholder="Zadejte heslo znovu" name="confirmPassword" required>
+      <br/>
+      <span id="confirmPasswordError" class="reminder-warning"></span>
+      <br/>
+      <button type="submit" class="modal-btn-full">Registrovat se</button>
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Zapamatovat si mě
+      </label>
+    </div>
+    <div class="container-modal-bottom">
+      <div class="container-column">
+        <button type="button" class="cancelbtn">Zrušit</button>
+      </div>
+      <div class="container-column">
+        <span class="psw"> <a href="#"  id="registerToLogin">Máte již účet?</a></span>
+        <span class="psw"><a href="#">Zapomněli jste heslo?</a></span>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
 
 
   <section class="experience_section layout_padding">
