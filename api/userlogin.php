@@ -56,24 +56,81 @@ function loginuser($data) {
     }
 
 
-    // if ($data['remember']) { // If the user checked "Remember Me"
-    //     $token = bin2hex(random_bytes(16)); // Generate a random token
-    //     $hashedToken = hash('sha256', $token); // Hash the token
+    if ($data['action-remember']) { // If the user checked "Remember Me"
+        $token = bin2hex(random_bytes(16)); // Generate a random token
+        $hashedToken = hash('sha256', $token); // Hash the token
 
-    //     // Store the hashed token and user ID in your database
-    //     // Replace this with your actual database code
-    //     $timestamp = time() + 60 * 60 * 24 * 30;
-    //     $datetime = date('Y-m-d H:i:s', $timestamp);
+        // Store the hashed token and user ID in your database
+        // Replace this with your actual database code
+        $timestamp = time() + 60 * 60 * 24 * 30;
+        $datetime = date('Y-m-d H:i:s', $timestamp);
+        $stmt = $db->query('UPDATE Users SET Cookie = ?, ExpiryTime = ? WHERE UserID = ?', [$hashedToken, $datetime, $user['UserID']]);
+        // Set a cookie in the user's browser containing the original token and user ID
+        // The cookie expires in 30 days
+        setcookie('rememberme', $user['UserID'] . ':' . $token,  $timestamp);
+    }
 
-    //     $sql = "SELECT * FROM Users WHERE Email = :email";
-    //     $db->query('INSERT INTO Users (Cookie, ExpiryTime) VALUES (?, ?) WHERE ID = ?', [$hashedToken, $datetime, $user['UserID']]);
+    session_set_cookie_params([
+        'samesite' => 'Lax', // or 'Strict' or 'None'
+    ]);
+    session_start();
+    $_SESSION['user'] = $user['Email'];
+    send_response([
+        'status' => 1,
+        'message' => 'Přihlášení úspěšné',
+    ]);
+    $db->close();
+}
 
-    //     // Set a cookie in the user's browser containing the original token and user ID
-    //     // The cookie expires in 30 days
-    //     setcookie('rememberme', $user['ID'] . ':' . $token,  $timestamp);
-    // }
+function checkcookie($data) {
+    if (!isset($_COOKIE['rememberme'])) {
+        send_response([
+            'status' => 0,
+            'message' => 'Neplatný token',
+        ]);
+        return;
+    }
+    $cookie = $_COOKIE['rememberme'];
+    $parts = explode(':', $cookie);
+    $userID = $parts[0];
+    $token = $parts[1];
 
     
+
+    $sql = "SELECT * FROM Users WHERE UserID = :userID";
+    $params = array(':userID' => $userID);
+
+    $db = new Database();
+    $stmt = $db->query($sql, $params);
+    $user = $stmt->fetch();
+
+    if (!$user) {
+        send_response([
+            'status' => 0,
+            'message' => 'Neplatný token',
+        ]);
+        $db->close();
+        return;
+    }
+
+    $hashedToken = hash('sha256', $token);
+    if ($user['Cookie'] !== $hashedToken) {
+        send_response([
+            'status' => 0,
+            'message' => 'Neplatný token',
+        ]);
+        $db->close();
+        return;
+    }
+
+    if (strtotime($user['ExpiryTime']) < time()) {
+        send_response([
+            'status' => 0,
+            'message' => 'Platnost tokenu vypršela',
+        ]);
+        $db->close();
+        return;
+    }
 
     session_set_cookie_params([
         'samesite' => 'Lax', // or 'Strict' or 'None'
@@ -90,6 +147,9 @@ function loginuser($data) {
 
 $data = get_request_data();
 switch ($data['action']) {
+    case 'checkcookie':
+        checkcookie($data);
+        break;
     case 'login':
         loginuser($data);
         break;

@@ -29,7 +29,27 @@ function closeModal(modal) {
 
 // Event listener for the showButton to open the loginDialog
 showButton.addEventListener("click", () => {
-    openModal(loginDialog);
+        let formData = new FormData();
+        formData.append("action", "checkcookie");
+        fetch("http://localhost/BMWA_UPCE/api/userlogin.php", {
+                method: "POST",
+                body: formData,
+                credentials: 'include' // Include cookies in the request
+        })
+                .then(response => response.json()) // Parse response as JSON
+                .then(data => {
+                        console.log(data.message);
+                        if(data.status){
+                                window.location.href = "index.php";
+                        }else{
+                                openModal(loginDialog);
+                        }
+                })
+                .catch(error => {
+                        openModal(loginDialog);
+                        console.log("Error:", error);
+                })
+    
 });
 
 // Event listener for the loginCancel button to close the loginDialog
@@ -57,30 +77,22 @@ loginForm.addEventListener('submit', function(event) {
         formData.append("action", "login");
         formData.append("email", email);
         formData.append("password", password);
+        if(remember){
+                formData.append("action-remember", "true");
+        }else{
+                formData.append("action-remember", "false");
+        }
         fetch("http://localhost/BMWA_UPCE/api/userlogin.php", {
                 method: "POST",
-                body: formData
+                body: formData,
+                credentials: 'include' // Include cookies in the request
         })
                 .then(response => response.json()) // Parse response as JSON
                 .then(data => {
                         alert(data.message);
-                        // if(data.status == 1){
-                        //         alert(data.message);
-                        //         formData = new FormData();
-                        //         formData.append("action", "startsession");
-                        //         if(remember){
-                        //                 formData.append("action-remember", "true");
-                        //         }else{
-                        //                 formData.append("action-remember", "false");
-                        //         }
-                        //         fetch("http://localhost/BMWA_UPCE/api/userlogin.php", {
-                        //         method: "POST",
-                        //         body: formData,
-                        //         credentials: 'include' // Include cookies in the request
-                        //         }).then(response => response.json()).then(data => {
-                        //                 window.location.href = "index.php";
-                        //         })
-                        // }
+                        if(data.status){
+                                window.location.href = "index.php";
+                        }
                 })
                 .catch(error => {
                         console.log("Error:", error);
@@ -185,8 +197,21 @@ registerForm.addEventListener('submit', function(event) {
                 .catch(error => {
                         console.log("Error:", error);
                 })
-
-
-
-
         });
+
+
+        // if (isset($_COOKIE['rememberme'])) {
+        //         list($userID, $token) = explode(':', $_COOKIE['rememberme']);
+        //         $hashedToken = hash('sha256', $token);
+            
+        //         // Look for a matching token in your database
+        //         // Replace this with your actual database code
+        //         $stmt = $db->query('SELECT * FROM user_tokens WHERE user_id = ? AND token = ?', [$userID, $hashedToken]);
+        //         $userToken = $stmt->fetch();
+            
+        //         if ($userToken) {
+        //             // The token is valid, log the user in
+        //             session_start();
+        //             $_SESSION['user'] = $userID;
+        //         }
+        //     }
