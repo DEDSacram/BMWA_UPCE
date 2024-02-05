@@ -136,14 +136,15 @@ if (sessionStorage.getItem('hasCodeRunBefore') != 'true') {
               button.textContent = todoItem.ListName;
               button.classList.add("todo-list"); // Add the class "todo-list"
               button.onclick = handleClick; // Set the onclick event to the named function handleClick
-              container.appendChild(button);
+              container.insertBefore(button, container.firstChild);
             });
           })
           .catch(error => {
             console.log("Error:", error);
           });
 
-          function handleClick() {
+        }
+        function handleClick() {
             const listId = this.getAttribute("data-id");
 
             const manageTodoLists = document.getElementById("manage_todo_lists");
@@ -153,8 +154,41 @@ if (sessionStorage.getItem('hasCodeRunBefore') != 'true') {
             managetasks.classList.remove("hidden");
             // Do something with the listId
             console.log("Clicked list ID:", listId);
+
+            //save new created to-do lists
+            //call to dom
+            if(sessionStorage.getItem('savenewTodoLists') != 'true'){
+              return
+            }
+            let formData = new FormData();
+              formData.append("action", "addtodolist");
+              formData.append("ListName", this.textContent);
+
+              // create an array for form data 
+              $array = [];
+              
+
+              formData.append("ListNameArray", this.textContent);
+
+           
+
+              fetch("http://localhost/BMWA_UPCE/api/app.php", {
+                method: "POST",
+                body: formData,
+                credentials: 'include' // Include cookies in the request
+              })
+              .then(response => response.json())
+              .then(data => {
+                console.log(data);
+              })
+              .catch(error => {
+                console.log("Error:", error);
+              });
+              sessionStorage.setItem('savenewTodoLists', 'false');
+
+
+
           }
-        }
 
         function backToTodoLists() {
 
@@ -163,6 +197,21 @@ if (sessionStorage.getItem('hasCodeRunBefore') != 'true') {
 
           const managetasks = document.getElementById("manage-tasks");
           managetasks.classList.add("hidden");
+        }
+
+        function addnewtodolist(){
+          let ListName = prompt('Type list name');
+          if(ListName == null || ListName == ""){
+            return;
+          }
+          sessionStorage.setItem('savenewTodoLists', 'true');
+          
+          const TodoLists = document.getElementById("todo-lists");
+          const button = document.createElement("button");    // do not add a id to know if it is new
+          button.textContent = ListName;
+          button.classList.add("todo-list");
+          button.onclick = handleClick;
+          TodoLists.insertBefore(button, TodoLists.firstChild);
         }
 
         generateTodoLists();

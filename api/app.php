@@ -111,6 +111,9 @@ switch ($data['action']) {
     case 'gettodolists':
         getToDoLists($userId);
         break;
+    case 'addtodolist':
+        addTodoList($data['ListNames'], $userId);
+        break;
     case 'getitemsintodolist':
         getItemsInToDoList($data['ListID'], $userId);
         break;
