@@ -89,6 +89,7 @@ function checkcookie($data) {
         'samesite' => 'Lax', // or 'Strict' or 'None'
     ]);
     session_start();
+    // SESSION ONLY, NO REMEMBER ME COOKIE
     if(isset($_SESSION['user'])){
         send_response([
             'status' => 1,
@@ -96,6 +97,7 @@ function checkcookie($data) {
         ]);
         return;
     }
+     // SET GUARD ABOVE TO ALREADY DEFAULT TO FALSE TO AVOID UNECESSARY CODE ASSIGNMENTS
     $_SESSION['guard'] = false;
   
     if (!isset($_COOKIE['rememberme'])) {

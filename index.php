@@ -6,6 +6,7 @@ error_reporting(-1);
 
 session_start(); // Start the session
 
+//redirect only when guard is set, which is always and if it isnt move to the javascript and set it there, if a cookie is valid, otherwise restart site and redirect
 if(isset($_SESSION['guard']) && $_SESSION['guard'] == false){
   header('Location: main.php'); // Redirect to the login page
   exit;
