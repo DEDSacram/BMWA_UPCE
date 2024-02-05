@@ -38,7 +38,6 @@ showButton.addEventListener("click", () => {
         })
                 .then(response => response.json()) // Parse response as JSON
                 .then(data => {
-                        console.log(data.message);
                         if(data.status){
                                 window.location.href = "index.php";
                         }else{

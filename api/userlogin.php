@@ -5,6 +5,7 @@ ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
 error_reporting(-1);
 
+
 function createuser($data) {
     $email = $data['email'];
     $password = password_hash($data['password'], PASSWORD_DEFAULT);
@@ -56,7 +57,7 @@ function loginuser($data) {
     }
 
 
-    if ($data['action-remember']) { // If the user checked "Remember Me"
+    if ($data['action-remember'] == 'true') { // If the user checked "Remember Me"
         $token = bin2hex(random_bytes(16)); // Generate a random token
         $hashedToken = hash('sha256', $token); // Hash the token
 
@@ -74,6 +75,7 @@ function loginuser($data) {
         'samesite' => 'Lax', // or 'Strict' or 'None'
     ]);
     session_start();
+    $_SESSION['guard'] = true;
     $_SESSION['user'] = $user['Email'];
     send_response([
         'status' => 1,
@@ -87,6 +89,13 @@ function checkcookie($data) {
         'samesite' => 'Lax', // or 'Strict' or 'None'
     ]);
     session_start();
+    if(isset($_SESSION['user'])){
+        send_response([
+            'status' => 1,
+            'message' => 'Session only',
+        ]);
+        return;
+    }
     $_SESSION['guard'] = false;
   
     if (!isset($_COOKIE['rememberme'])) {
@@ -149,8 +158,18 @@ function checkcookie($data) {
 }
 
 
+
+
 $data = get_request_data();
 switch ($data['action']) {
+    case 'destroysession':
+        session_start();
+        session_destroy();
+        send_response([
+            'status' => 1,
+            'message' => 'Odhlášení úspěšné',
+        ]);
+        break;
     case 'checkcookie':
         checkcookie($data);
         break;

@@ -3,15 +3,14 @@ ob_start(); // Start output buffering
 ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
 error_reporting(-1);
+
 session_start(); // Start the session
 
-//Communicate that session has been destroyed and that the code for checking cookie should be checked again // need to reset session storage
-//todo
-
-if($_SESSION['guard'] == false && $_SESSION['guard'] != null){
+if(isset($_SESSION['guard']) && $_SESSION['guard'] == false){
   header('Location: main.php'); // Redirect to the login page
   exit;
 }
+
 ob_end_flush();
 ?>
 <!DOCTYPE html>
@@ -196,6 +195,28 @@ if (sessionStorage.getItem('hasCodeRunBefore') != 'true') {
 </script>
 <script>
     //create color wheel
+    document.addEventListener('keydown', function(event) {
+  if (event.key === "Escape") {
+    let formData = new FormData();
+  formData.append("action", "destroysession");
+  fetch("http://localhost/BMWA_UPCE/api/userlogin.php", {
+      method: "POST",
+      body: formData,
+      credentials: 'include' // Include cookies in the request
+  })
+  .then(response => response.json()) // Parse response as JSON
+  .then(data => {
+   if(data.status){
+    sessionStorage.setItem('hasCodeRunBefore', 'false');
+    window.location.href = 'logout.php'; // Redirect to the login page
+   }
+  })
+  .catch(error => {
+      alert('Odhlášení neúspěšné')
+      console.log("Error:", error);
+  });
+  }
+});
     createcolorpicker('canvas','sidepicker','colorpreview')
 </script>
 </body>
