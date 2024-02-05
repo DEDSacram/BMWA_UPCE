@@ -51,10 +51,22 @@ if (sessionStorage.getItem('hasCodeRunBefore') != 'true') {
 <body>
   <!-- Sidebar -->
   <div class="sidebar">
-    <button onclick="toggleSidebar()">Back</button>
+  <button onclick="toggleSidebar()">Back</button>
+
+  <div id="manage-tasks" class="hidden">
+  <button onclick="backToTodoLists()">Backto</button>
     <button onclick="addnew()" id="addtask">+</button>
     <button onclick="createDrag()" id="addtaskdd">+</button>
-    <div id="sidebar-todos" class="container"></div>
+    <!-- <div id="sidebar-todos" class="container"></div> -->
+  </div>
+  
+  <div id="manage_todo_lists">
+    <button onclick="addnewtodolist()">+</button>
+    <div id="todo-lists"></div>
+  </div>
+  
+    
+
 </div>
 
 
@@ -95,105 +107,66 @@ if (sessionStorage.getItem('hasCodeRunBefore') != 'true') {
 
 
 <!-- Main Container -->
-<div class="main-container">
+<div id="main-container">
 
 </div>
 
 
 
-<script>
-  function toggleSidebar() {
-      const sidebar = document.querySelector('.sidebar');
-      const main = document.querySelector('.main-container');
-      if(sidebar.style.width === '0px'){
-          sidebar.style.width = '250px';
-          main.classList.add('sidebar-expanded');
-      }else{
-          sidebar.style.width = '0'
-          main.classList.remove('sidebar-expanded');
-      }
-  }
-  
-  function addnew(){
-      let foo = prompt('Type here');
-      const main = document.querySelector('.main-container');
-      let div = document.createElement("div");
-      div.textContent = foo;
-      div.classList.add('container');
-  
-  
-      div.addEventListener('dragover', e => {
-  e.preventDefault()
-  const afterElement = getDragAfterElement(div, e.clientY)
-  const draggable = document.querySelector('.dragging')
-  
-  //check
-  if (afterElement == null) {
-    div.appendChild(draggable)
-  } else {
-    div.insertBefore(draggable, afterElement)
-  }
-  })
-  
-      main.appendChild(div)
-  }
-
-  function initializesidebar(){
-     let div = document.getElementById("sidebar-todos")
-     div.addEventListener('dragover', e => {
-  e.preventDefault()
-  const afterElement = getDragAfterElement(div, e.clientY)
-  const draggable = document.querySelector('.dragging')
-  
-  //check
-  if (afterElement == null) {
-    div.appendChild(draggable)
-  } else {
-    div.insertBefore(draggable, afterElement)
-  }
-  })
-  
-  }
-  
-  initializesidebar()
-
-  function getDragAfterElement(container, y) {
-  const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
-  
-  return draggableElements.reduce((closest, child) => {
-  const box = child.getBoundingClientRect()
-  const offset = y - box.top - box.height / 2
-  if (offset < 0 && offset > closest.offset) {
-    return { offset: offset, element: child }
-  } else {
-    return closest
-  }
-  }, { offset: Number.NEGATIVE_INFINITY }).element
-  }
-  
-  
-  
-  function createDrag(){
-  const sidebar = document.getElementById("sidebar-todos");
-  let foo = prompt('Type here');
-  let div = document.createElement("p");
-  div.textContent = foo;
-  div.classList.add('draggable');
-  div.draggable = true;
-  
-  div.addEventListener('dragstart', () => {
-  div.classList.add('dragging')
-  })
-  
-  div.addEventListener('dragend', () => {
-  div.classList.remove('dragging')
-  })
-  sidebar.appendChild(div);
-  }
-</script>
+<script src="scheduler.js"></script>
 <script src="modal-settings.js"></script>
-<script src="colorwheel.js">
-</script>
+<script src="colorwheel.js"></script>
+<script>
+        function generateTodoLists() {
+          // Dynamically generate content
+          let formData = new FormData();
+          formData.append("action", "gettodolists");
+          fetch("http://localhost/BMWA_UPCE/api/app.php", {
+            method: "POST",
+            body: formData,
+            credentials: 'include' // Include cookies in the request
+          })
+          .then(response => response.json())
+          .then(data => {
+            const container = document.getElementById("todo-lists");
+            container.innerHTML = "";
+            data.forEach(todoItem => {
+              const button = document.createElement("button"); // Create a button element
+              button.setAttribute("data-id", todoItem.ListID);
+              button.textContent = todoItem.ListName;
+              button.classList.add("todo-list"); // Add the class "todo-list"
+              button.onclick = handleClick; // Set the onclick event to the named function handleClick
+              container.appendChild(button);
+            });
+          })
+          .catch(error => {
+            console.log("Error:", error);
+          });
+
+          function handleClick() {
+            const listId = this.getAttribute("data-id");
+
+            const manageTodoLists = document.getElementById("manage_todo_lists");
+            manage_todo_lists.classList.add("hidden");
+
+            const managetasks = document.getElementById("manage-tasks");
+            managetasks.classList.remove("hidden");
+            // Do something with the listId
+            console.log("Clicked list ID:", listId);
+          }
+        }
+
+        function backToTodoLists() {
+
+          const manageTodoLists = document.getElementById("manage_todo_lists");
+          manage_todo_lists.classList.remove("hidden");
+
+          const managetasks = document.getElementById("manage-tasks");
+          managetasks.classList.add("hidden");
+        }
+
+        generateTodoLists();
+  </script>
 <script>
     //create color wheel
     document.addEventListener('keydown', function(event) {

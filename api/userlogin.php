@@ -76,7 +76,7 @@ function loginuser($data) {
     ]);
     session_start();
     $_SESSION['guard'] = true;
-    $_SESSION['user'] = $user['Email'];
+    $_SESSION['user'] = $user['UserID'];
     send_response([
         'status' => 1,
         'message' => 'Přihlášení úspěšné',
@@ -149,7 +149,7 @@ function checkcookie($data) {
         return;
     }
 
-    $_SESSION['user'] = $user['Email'];
+    $_SESSION['user'] = $user['UserID'];
     //guarding of site
     $_SESSION['guard'] = true;
     send_response([
