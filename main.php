@@ -45,7 +45,7 @@
         
       <button type="submit" class="modal-btn-full">Přihlásit se</button>
       <label>
-        <input type="checkbox" checked="checked" name="remember"> Zapamatovat si mě
+        <input type="checkbox" checked="checked" name="remember"> Zapamatovat si mě (30 dní)
       </label>
     </div>
     <div class="container-modal-bottom">
