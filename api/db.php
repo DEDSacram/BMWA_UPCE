@@ -32,6 +32,9 @@ class Database {
         return $stmt;
     }
 
+    public function getLastInsertedId() {
+        return $this->conn->lastInsertId();
+    }
 
 }
 

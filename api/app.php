@@ -35,7 +35,12 @@ class Database {
         return $stmt;
     }
 
+    public function getLastInsertedId() {
+        return $this->conn->lastInsertId();
+    }
+
 }
+
 
 function getToDoLists($userId) {
     $db = new Database();
@@ -87,6 +92,28 @@ WHERE
 }
 
 
+function addToDoList($listNames, $userId) {
+    $db = new Database();
+    $listIds = array();
+    for ($i = 0; $i < count($listNames); $i++) {
+        $listName = $listNames[$i];
+        $sql = "INSERT INTO `ToDoLists` (`UserID`,`ListName`) VALUES (:userId,:listName)";
+        $params = array(':userId' => $userId, ':listName' => $listName);
+        $stmt = $db->query($sql, $params);
+        $listIds[] = $db->getLastInsertedId();
+    }
+
+    $db->close();
+
+
+    // Add last inserted IDs into an array
+    $result = array(
+        'lastInsertedIds' => $listIds
+    );
+    send_response($result);
+}
+
+
 
 
 session_start();
@@ -112,7 +139,7 @@ switch ($data['action']) {
         getToDoLists($userId);
         break;
     case 'addtodolist':
-        addTodoList($data['ListNames'], $userId);
+        addTodoList($data['ListNameArray'], $userId);
         break;
     case 'getitemsintodolist':
         getItemsInToDoList($data['ListID'], $userId);

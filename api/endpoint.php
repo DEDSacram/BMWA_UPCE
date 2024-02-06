@@ -4,11 +4,20 @@ function get_method() {
 }
 
 function get_request_data() {
-    return array_merge(
+    $requestData = array_merge(
         empty($_POST) ? array() : $_POST,
         (array) json_decode(file_get_contents('php://input'), true),
         $_GET
     );
+
+    // Translate key values to arrays if necessary
+    // foreach ($requestData as $key => $value) {
+    //     if (is_string($value) && strpos($value, ',') !== false) {
+    //         $requestData[$key] = explode(',', $value);
+    //     }
+    // }
+
+    return $requestData;
 }
 
 function send_response($response, $code = 200) {
